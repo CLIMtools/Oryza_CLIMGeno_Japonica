@@ -44,7 +44,7 @@ shinyServer(function(input, output, session) {
                          uiOutput("columns"),
                          tags$br(),tags$br(),tags$br(),tags$br(),tags$br(),tags$br(), #add some space between selection columns and subset search
                          # uiOutput("view_order"), checkboxInput("view_order_desc", "DESC", value = FALSE),
-                         returnTextInput("dv_select", "Subset (e.g., score_AMM > 6 & SNP_Effect == 'missense variant')", '')
+                         returnTextInput("dv_select", "Subset (e.g., score_AMM > 6 & EFFECT == 'missense variant')", '')
                        ),
                        helpModal('Data Table View','view',includeMarkdown("tools/manage.md"))      
       ),#end conditional Table
@@ -194,7 +194,7 @@ shinyServer(function(input, output, session) {
                              col(7, wellPanel(
                                p("-", a("Zbrowse", href="http://www.baxterlab.org/untitled-cqi0"), "Ziegler, Greg R., Ryan H. Hartsock, and Ivan Baxter. Zbrowse: an interactive GWAS results browser PeerJ Computer Science 1 (2015): e3."),
                                
-                              
+                               
                              )),
                              col(7, h4('Select appropriate columns to be used for plotting.'))
                              #HTML('<h4>Select appropriate columns to be used for plotting.</h4>'),
@@ -345,7 +345,7 @@ shinyServer(function(input, output, session) {
                      selected="Select All",
                      multiple=TRUE, options = list(dropdownParent="body",plugins=list("remove_button")))
     })
-    selectizeInput("columns", "Click on columns to show/omit:", choices = as.list(cols), selected = c( "chr",	"pos",	"REF",	"ALT","score","MAF", "SNP_Effect",	"SNPfold_CC",	"Locus_ID",	"Transcript_ID",	"Gene_Symbol",	"Gene_name",	"Description", "FDR",	"bonferroni",	"Fst","Tajima_D","PI"), multiple = TRUE, options = list(dropdownParent="body",plugins=list("remove_button")))
+    selectizeInput("columns", "Click on columns to show/omit:", choices = as.list(cols), selected = c("Chr","Pos","REF","ALT","MAF","EFFECT","SNPfold_CC","Locus_ID","Transcript_ID","Gene_Symbol","Gene_name","Description","score","FDR","bonferroni","Fst","Tajima_D","PI"), multiple = TRUE, options = list(dropdownParent="body",plugins=list("remove_button")))
     
   })
   
@@ -402,7 +402,7 @@ shinyServer(function(input, output, session) {
     }else{
       selected = names(cols[1])
     }    
-    selectizeInput("chrColumn", "Chromosome Column:", choices = as.list(cols), selected = "chr", multiple = FALSE, options = list(dropdownParent="body"))
+    selectizeInput("chrColumn", "Chromosome Column:", choices = as.list(cols), selected = "Chr", multiple = FALSE, options = list(dropdownParent="body"))
   })
   
   output$bpColumn <- renderUI({
@@ -414,7 +414,7 @@ shinyServer(function(input, output, session) {
       selected = names(cols[2])
     }
     #selectInput("bpColumn", "Base Pair Column:", choices = as.list(cols), selected = selected, multiple = FALSE, selectize = TRUE)
-    selectizeInput("bpColumn", "Base Pair Column:", choices = as.list(cols), selected = "pos", multiple = FALSE, options = list(dropdownParent="body"))
+    selectizeInput("bpColumn", "Base Pair Column:", choices = as.list(cols), selected = "Pos", multiple = FALSE, options = list(dropdownParent="body"))
   })
   
   output$traitColumns <- renderUI({
@@ -427,7 +427,7 @@ shinyServer(function(input, output, session) {
     }
     print(selected)
     conditionalPanel(condition = "input.plotAll==false",
-                     selectizeInput("traitColumns", "Group by these trait column(s):", choices = as.list(cols), selected = "SNP_Effect", multiple = TRUE, options = list(dropdownParent="body"))
+                     selectizeInput("traitColumns", "Group by these trait column(s):", choices = as.list(cols), selected = "EFFECT", multiple = TRUE, options = list(dropdownParent="body"))
     )        
   })  
   #traits <- c("Select All",sort(unique(values[[input$datasets]][,i])))
@@ -767,10 +767,10 @@ shinyServer(function(input, output, session) {
     }        
     
     #check if there is too much data (>5000 data points), trim to 5000
-  #  if(nrow(chromChart)>5000){
+    #  if(nrow(chromChart)>5000){
     #  cutVal <- sort(chromChart[,input$yAxisColumn],decreasing = T)[5000]
     #  chromChart <- chromChart[chromChart[,input$yAxisColumn] >= cutVal,]
-  #  }        
+    #  }        
     
     #calculate window for plotband
     pbWin <- isolate({
@@ -866,7 +866,7 @@ shinyServer(function(input, output, session) {
       invisible(sapply(pkSeries, function(x) {if(length(x)==0){return()};a$series(data = x, type = "scatter", turboThreshold=5000, name = paste0(x[[1]]$trait), color = colorTable$color[colorTable$trait == as.character(x[[1]]$trait)])}))
     }
     a$chart(zoomType="xy", alignTicks=FALSE,events=list(click = "#!function(event) {this.tooltip.hide();}!#"))
-    a$title(text=paste(input$datasets,"Results for Chromosome",input$chr,sep=" "))
+    a$title(text=paste(input$datasets,"Results for Chromosome",input$Chr,sep=" "))
     a$subtitle(text="Rollover for more info. Drag chart area to zoom. Click point for zoomed annotated plot.")
     
     a$plotOptions(
