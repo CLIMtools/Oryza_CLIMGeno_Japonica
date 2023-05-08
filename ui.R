@@ -4,7 +4,6 @@ library(shinyjs)
 library(shinycssloaders)
 library(shinyjqui)###need to upload package to server
 library(readr)
-library(googleAnalyticsR)
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
