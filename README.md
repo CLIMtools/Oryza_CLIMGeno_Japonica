@@ -1,4 +1,4 @@
-[<img align="left" width="150" height="175" src="https://github.com/CLIMtools/Oryza_CLIMGeno_Japonica/blob/main/www/Oryza_CLIMGeno_logo.png">](https://gramene.org/CLIMtools/oryza_v1.0/Oryza_CLIMGeno_Japonica/ "Oryza CLIMGeno: Japonica landraces")
+[<img align="left" width="200" height="175" src="https://github.com/CLIMtools/Oryza_CLIMGeno_Japonica/blob/main/www/Oryza_CLIMGeno_logo.png">](https://gramene.org/CLIMtools/oryza_v1.0/Oryza_CLIMGeno_Japonica/ "Oryza CLIMGeno: Japonica landraces")
 ****
 #  [<span style="color:#DFDB48">OryzaCLIM V1.0</span>](https://gramene.org/CLIMtools/oryza_v1.0/OryzaCLIM/ "OryzaCLIM V1.0")
 
