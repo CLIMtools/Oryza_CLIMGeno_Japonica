@@ -29,7 +29,7 @@ shinyUI(fluidPage(
         <div style="display: flex; flex-direction: column;">
           <p style="color: #dfd92f; font-size: 60px;">Oryza CLIMGeno</p>
          <p style="color: #dfd92f; font-size: 40px;">Japonica varieties</p>
-          <p style="color: black; font-size: 30px;">Explore the natural genetic variation in the local environment of rice</p>
+          <p style="color: black; font-size: 30px;">Explore the natural genetic variation in the local environment of rice (FDR < 0.01)</p>
         </div>
       </div>'
       )
@@ -45,7 +45,8 @@ shinyUI(fluidPage(
         #    ),
         #uiOutput("ui_Manage")
         uiOutput("ui_All"),
-        width=3,      
+        width=3,      wellPanel(a(h4("Considerations before using this tool"), href = "Considerations.pdf")),
+      wellPanel(a(h4("Methodology")),href="Methodology.pdf"),
         wellPanel(a(div(id = "snpfold_info", style = "display: none;",
                         h4("SNPfold Correlation Coefficient (SNPfold CC)"),
                         h6(style = "text-align: justify;",
